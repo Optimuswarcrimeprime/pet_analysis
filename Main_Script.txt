@@ -1,28 +1,37 @@
 from google.colab import files
 import pet_analysis as pa
 
+# Upload a file from the local system to Google Colab
 uploaded = files.upload()
+# Get the file path of the uploaded file
 file_path = list(uploaded.keys())[0]
 
+# Load and clean the data from the uploaded file
 df = pa.load_data(file_path)
 cleaned_df = pa.clean_data(df)
 
-#Species or feature can be changed to whatever user pleases
+# Calculate the average price of pets in a specific species ('Rabbit' in this case)
 species = 'Rabbit'
 average_price = pa.calculate_average_price(cleaned_df, species)
 print(f"The average price of {species} is: {average_price}")
 
+# Find pets with a specific special feature ('yes' in this case)
 feature = 'yes'
 pets_with_feature = pa.find_pets_with_feature(cleaned_df, feature)
 print(f"Pets with feature '{feature}': {pets_with_feature}")
 
+# Get statistics (average price and average age) for each species in the dataset
 species_statistics = pa.get_species_statistics(cleaned_df)
 print(f"Species statistics: {species_statistics}")
 
+# Plot the distribution of prices using a histogram
 pa.plot_price_distribution(cleaned_df)
 
+# Plot the average price by species using a bar chart
 pa.plot_average_price_by_species(cleaned_df)
 
+# Plot a scatter plot of price vs. age
 pa.plot_price_vs_age(cleaned_df)
 
+# Plot the distribution of ages for each species using a box plot
 pa.plot_age_distribution_by_species(cleaned_df)
