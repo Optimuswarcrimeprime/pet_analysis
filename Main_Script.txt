@@ -1,0 +1,28 @@
+from google.colab import files
+import pet_analysis as pa
+
+uploaded = files.upload()
+file_path = list(uploaded.keys())[0]
+
+df = pa.load_data(file_path)
+cleaned_df = pa.clean_data(df)
+
+#Species or feature can be changed to whatever user pleases
+species = 'Rabbit'
+average_price = pa.calculate_average_price(cleaned_df, species)
+print(f"The average price of {species} is: {average_price}")
+
+feature = 'yes'
+pets_with_feature = pa.find_pets_with_feature(cleaned_df, feature)
+print(f"Pets with feature '{feature}': {pets_with_feature}")
+
+species_statistics = pa.get_species_statistics(cleaned_df)
+print(f"Species statistics: {species_statistics}")
+
+pa.plot_price_distribution(cleaned_df)
+
+pa.plot_average_price_by_species(cleaned_df)
+
+pa.plot_price_vs_age(cleaned_df)
+
+pa.plot_age_distribution_by_species(cleaned_df)
